@@ -1,16 +1,20 @@
 5_Anotacoes
 
 O que você fez:
-
+Fiz a classe nota e ajudei a implementar a classe controller junto com minha dupla
 
 Com quem e como você fez:
-   
+fiz em dupla com o Diney, esse projeto foi um pouco dificil pra me entender a parte do gerenciador de Login, fazer a comparação de um com o
+outro, mas como ja tinhamos o repositorio e também um modelo de gerenciador de login que foi ministrado na aula ajudou muito esse exemplo, 
+a classe reporitorio ja tinhamos entao não teve probelma pois usammos de projetos anteriores. fizemos os gets, sets, titulo, texto, 
+construtor, o toString so tinha como retorno so o texto, prosseguimos para a calsse usuario onde fizemos o implements comparable, 
+esse metodo faz com que compare os usuarios. Na classe controller colocamos os repositorios de usuarios, notas e o gerenciador de login.
 
 O que aprendeu e sabe fazer:
-   
+O gerenciador de login   
 
 O que tem dificuldade ainda:
-   
+Ainda tenho dificulde no controller
 
 Quanto tempo levou pra fazer a atividade:
-
+3 horas
