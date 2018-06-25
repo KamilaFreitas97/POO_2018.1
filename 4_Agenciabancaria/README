@@ -1,0 +1,28 @@
+4_Agenciabancaria
+
+-O que você fez:
+
+Fiz as Classes Operacao, cliente e alguns atributos do controller, e alguns metodos da conta
+
+-Com quem e como você fez:
+
+Fiz de dupla com a Kamyla.
+
+Pra mim esse trabalho foi o mais dificl até mesmo comparado a clinica veterinaria, pois ele havia mais classes com mais repositorio, 
+a gente fez as classes Cliente, operacao, reaproveitamos a classe repositorio, e o controller. Na classe operacao
+foi mais simples de fazer pois era so os atributos o construtor e os get e sets, ja na classe conta foi necessario fazer os metodos
+depositar, de sacar, transferir e encerrar e seguido dos gets e sets, e o tostring pra mostrar o saldo da conta e se ela esta ativa ou não.
+Na classe cliente foi feito o atributos, construtor, fizemos metodos como gets , sets e addconta pra adicionar uma nova conta ao
+cliente e o toString, usamos também um Repositorio de contas dentro, reaproveitamos o Repositorio de trabalhos passados. 
+Na classe controller teria que ter o repositorio de clientes e contas,reaproveitamos boa parte do controller de aulas passadas,
+Fizemos tambem a opcão showcontas que mostra o numero de contas do cliente, que mostra o status e o saldo da conta.
+
+-O que tem dificuldade ainda:
+
+ate que em fim estou conseguindo entender melhor como funciona o controller, as vezes dou um engasgo mas nada que praticas não se resolvam, 
+mesmo sim ainda tenho um pouco de dificuldade com o controller, o repositorio eu to começando a enteder como ele funciona ele vai servir 
+pra guardar os metodos que mais irei usar.  
+
+Quanto tempo levou pra fazer a atividade:
+
+9 dias
