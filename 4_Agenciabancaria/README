@@ -19,9 +19,9 @@ Fizemos tambem a opcão showcontas que mostra o numero de contas do cliente, que
 
 -O que tem dificuldade ainda:
 
-ate que em fim estou conseguindo entender melhor como funciona o controller, as vezes dou um engasgo mas nada que praticas não se resolvam, 
-mesmo sim ainda tenho um pouco de dificuldade com o controller, o repositorio eu to começando a enteder como ele funciona ele vai servir 
-pra guardar os metodos que mais irei usar.  
+Ate que em fim estou conseguindo entender melhor como funciona o controller, as vezes dou um engasgo mas nada que praticas não se resolvam, 
+o repositorio estou começando a enteder como ele funciona e pra que vai servir.  O uml desse era sem repositorio e sem gerenciador de login,
+foi um pouco demorado pra mim entender como desenvolv
 
 Quanto tempo levou pra fazer a atividade:
 
