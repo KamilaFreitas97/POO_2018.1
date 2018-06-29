@@ -61,12 +61,7 @@ public class User {
 	//metodos
 
 	public void seguir(User u) {
-		/*for(User u: seguidos.getAll())
-			if(u.username == user.username)*/
-	
-		/*seguidos.add("", user);
-		user.seguidores.add(username, this);*/
-		//System.out.println("debug: " + getId() );
+
 		u.seguidos.add(getId(), new User(getId()));
 		seguidores.add(u.getId(), u);	
 	}
