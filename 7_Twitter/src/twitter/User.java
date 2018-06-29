@@ -38,15 +38,6 @@ public class User {
 		return seguidos;
 	}
 
-
-	/*public Repositorio<Tweet> getMyTweets() {
-		return myTweets;
-	}
-
-	public void setMyTweets(Repositorio<Tweet> myTweets) {
-		this.myTweets = myTweets;
-	}*/
-
 	public Repositorio<Tweet> getTimeline() {
 		return timeline;
 	}
