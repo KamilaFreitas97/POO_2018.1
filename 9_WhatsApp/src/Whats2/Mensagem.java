@@ -6,22 +6,17 @@ public class Mensagem {
 	private String indice;
 	private String user;
 	private String texto;
-	private boolean lido;
+	private boolean mensagemLida;
+	
 	
 	public Mensagem(String indice, String user, String texto) {
 		this.indice = indice;
 		this.user = user;
 		this.texto = texto;
-		this.lido = false;
+		this.mensagemLida = false;		
 	}
+	
 
-	public String getUser() {
-		return user;
-	}
-
-	public void setUser(String user) {
-		this.user = user;
-	}
 
 	public String getIndice() {
 		return indice;
@@ -30,7 +25,14 @@ public class Mensagem {
 	public void setIndice(String indice) {
 		this.indice = indice;
 	}
+	
+	public String getUser() {
+		return user;
+	}
 
+	public void setUser(String user) {
+		this.user = user;
+	}
 	public String getTexto() {
 		return texto;
 	}
@@ -39,16 +41,20 @@ public class Mensagem {
 		this.texto = texto;
 	}
 
-	public boolean isLido() {
-		return lido;
+	public boolean isMensagemLida() {
+		return mensagemLida;
 	}
 
-	public void setLido(boolean lido) {
-		this.lido = lido;
+	public void setMensagemLida(boolean mensagemLida) {
+		this.mensagemLida = mensagemLida;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Mensagem [ userId = " + user + ":" + texto + "]" + "\n";
 	}
 	
-	public String toString() {
-		return " " + user + ":" + texto;
-	}
+	
 
 }
