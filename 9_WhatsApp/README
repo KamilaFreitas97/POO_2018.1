@@ -1,1 +1,26 @@
+O que você fez:
 
+fiz alguns metodos da classe controller e usuario, e  fiz a classe menssagem;
+
+Com quem e como você fez:
+
+Fiz em dupla com o Diney, fizemos o reaproveitamento do Repositorio, na classe usuario fizemos o construtor onde nele contem Repositorio
+de Chat e mensagem, fizemos tambem os gets e sets e os metodos como adicionar chat, mostrar mensagem, contagem, mostrar os grupos que o 
+usuario esta e o toString. Na classe Mensagem foi bem simples apenas seu construtor passando indice, usuario e o texto fizemos também
+os gets e sets e criamos uma boolean me mensagem lida seguido do toString que vai retornar o usuario e o texto e seu status;
+Na classe controller pegamos Repositorio de usuario e chat, fizemos construtor e depois os metodos a serem utilizados.
+
+O que aprendeu e sabe fazer:
+
+Percebi que o Whatsapp é semelhante ao twitter então conseguir me basear no twitter pra conseguir fazer esse trabalho, entende e 
+consegui aprender melhor na questão das classes ja uma dependia da outra, tipo no meu chat eu tenho usuarios e meus usuarios precisam de
+mensagens, uma envolvia-se na outra.
+
+O que tem dificuldade ainda:
+
+Por nao ter uml tive um pouco de dificuldade de entender como seria feito,  mas o guia disponibilizado foi de grande ajuda,
+os metodos foram um pouco dificeis de entender porque quando eu achava que ia da certo nao dava, o controller também foi meio ruim pra
+desenvolver comparado a clinica vet.
+
+Quanto tempo levou pra fazer a atividade:
+4 dias
