@@ -21,14 +21,6 @@ public class Usuario {
 		this.mensagens = mensagens;
 	}
 
-	/*public String getIdusuario() {
-		return idUsuario;
-	}
-
-	public void setIdusuario(String id) {
-		this.idUsuario = id;
-	}
-*/
 	public Repositorio<Chat> getChats() {
 		return grupos;
 	}
