@@ -3,137 +3,146 @@ package Whats2;
 import java.util.Scanner;
 
 public class Controller {
-	Scanner sca;
+	Scanner scan;
+	Repositorio<Usuario> user;
 	Repositorio<Chat> grupos;
-	Repositorio<User> usuarios;
-	int msg_indice = 0;
+	int idicemsg = 0;
 	
 	public Controller() {
-		sca = new Scanner(System.in);
+		scan = new Scanner(System.in);
+		user = new Repositorio<Usuario>("usuarios");
 		grupos = new Repositorio<Chat>("grupos");
-		usuarios = new Repositorio<User>("usuarios");
+		
 	}
 	
 	public String query(String line) {
-		String[] ui = line.split(" ");
+		String [] ui = line.split(" ");
 		
-		if(ui[0].equals("help"))
-			System.out.println("adduser _user, allusers\n"
-					+ "newchat _user _idgrupo, showchats\n"
-					+ "invite _iduser _idgrupo _convidado\n"
-					+ "leave _iduser _idgrupo\n"
-					+ "zap _idgrupo _idusuario _ msg\n"
-					+ "chats _iduser, users _idgrupo\n"
-					+ "msgchat _idgrupo, notify _iduser\n"
-					+ "ler _iduser _idgrupo");
-		//Adiciona um novo usuario
-		else if(ui[0].equals("adduser"))
-			usuarios.add(ui[1], new User(ui[1]));
-		
-		//Mostra todos os usuarios
-		else if(ui[0].equals("allusers")) {
-			String saida = "[ ";
-			for(User u : usuarios.getAll())
-				saida += u.toString() + " ";
-			return saida + "]";
+		//adiciona usuario pelo nome
+		if(ui[0].equals("addusuario"))
+			user.add(ui[1], new Usuario(ui[1]));
+		//mostra usuarios que foram adicionado
+		else if(ui[0].equals("mostrar")) {
+			String mostrar = " [ ";
+			for(Usuario us : user.getAll()) {
+				mostrar += us.toString();
+				
+			}
+			return mostrar + " ] ";
 		}
 		
-		
-		
-		//Criar um novo chat(grupo) parar mandar mensagens
-		else if(ui[0].equals("newchat")) {
-			usuarios.get(ui[1]).getGrupos().add(ui[2], new Chat(ui[2]));
-			grupos.add(ui[2], new Chat(ui[2]));
-			grupos.get(ui[2]).userchats.add(ui[1], usuarios.get(ui[1]));
+		//cria grupo com o nome do usario e o nome do grupo
+		else if(ui[0].equals("criargrupo")) {
+			//criei uma variavel auxiliar pra pegar meu objeto e assim nao criar dois objetos apenas um
+			Chat novoGrupo = new Chat(ui[2]);
+			user.get(ui[1]).addChat(novoGrupo);
+			
+			grupos.add(ui[2], novoGrupo);
+			novoGrupo.addusuarionogrupo(user.get(ui[1]));
+			
 		}
 		
-		
-		//Mostrar todos os grupos
-				else if(ui[0].equals("showchats")) {
-					String show = "";
-					for(Chat c : grupos.getAll())
-						show += c.toString();
-					return show;
-				}
-		
-		//convidar uma pessoa ao grupo
-		else if(ui[0].equals("invite")) {
-			usuarios.get(ui[1]).getGrupos().get(ui[2]).adicionarAOgrupo(usuarios.get(ui[3]));
-			grupos.get(ui[2]).userchats.add(ui[3], usuarios.get(ui[3]));
+		//diz os grupos que o usuario tem pelo nome
+		else if(ui[0].equals("meusgrupos")) {
+			System.out.println(user.get(ui[1]).MostrarGrupos());
 		}
 		
-		//Sair do grupo
-		else if(ui[0].equals("leave")) {
-			usuarios.get(ui[1]).getGrupos().remove(grupos.get(ui[2]).getChat());
-			grupos.get(ui[2]).getUserchats().remove(ui[1]);
-			grupos.get(ui[2]).escrever(new Mensagem(""+msg_indice, usuarios.get(ui[1]).getIdUSer(), "saiu"));
-		}
-		
-		//Envia uma nova mensagem para o grupo
-		else if(ui[0].equals("zap")) {
-			msg_indice++;
-			String texto = "";
-			for(int i = 3; i < ui.length; i++)
+		//envia mensagem pelo nome do grupo, nome do usuario e o texto
+		else if(ui[0].equals("enviarmensagem")) {
+			
+			idicemsg ++;
+			
+			String texto = " ";
+			for(int i = 3; i < ui.length; i++) {
 				texto += ui[i] + " ";
-			grupos.get(ui[1]).escrever(new Mensagem(""+msg_indice, usuarios.get(ui[2]).getIdUSer(), texto));
-		}
-		
-		//Meus chats
-		else if(ui[0].equals("chats"))
-			System.out.println(usuarios.get(ui[1]).mostrargrupos());
-		
-		//Mostra as mensagens que foram mandadas no grupo
-		else if(ui[0].equals("msgchat")) {
-			String msg = "";
-			for(Mensagem m : grupos.get(ui[1]).msg.getAll()) {
-				msg += m + "\n";
+			grupos.get(ui[1]).escreverMensagem(new Mensagem(""+idicemsg, user.get(ui[2]).getIdUsuario(), texto));
+			idicemsg++;				
 			}
-			return msg;
+			
+		}
+		//nome do usuario e grupo
+		else if(ui[0].equals("lergrupo")) {
+			System.out.println(user.get(ui[1]).getGrupos().get(ui[2]).MostrarMensagem(user.get(ui[1]).getIdUsuario()));
+		}
+		//adicona no grupo pelo no do usuario que criou o grupo, o nome do grupo e a pessoa que qur adicionar
+		else if(ui[0].equals("addnoGrupo")) {
+			user.get(ui[1]).getGrupos().get(ui[2]).addusuarionogrupo(user.get(ui[3]));
+			
+			user.get(ui[3]).addChat( grupos.get(ui[2]) );
+		}
+		//usuario saiu do grupo pelo nome e o grupo
+		else if(ui[0].equals("sairdogrupo")) {
+			Chat grupoProc = grupos.get(ui[2]);
+			Usuario user_remover = user.get(ui[1]);
+			
+			user_remover.getGrupos().remove(grupoProc.toString()); //remove grupo da lista de grupos do usuario
+			grupoProc.getUsers().remove(user_remover.getIdUsuario()); //vai remover o usuario da lista do usuario do grupo
+			
+			idicemsg++;
+			grupoProc.escreverMensagem(new Mensagem(""+idicemsg, user_remover.getIdUsuario(), "saiu"));
+			
 		}
 		
-		//Mostrar os usuarios que estão no grupo
-		else if(ui[0].equals("users"))
-			System.out.println(grupos.get(ui[1]).mostrarusuarios());
-		
-		
-		//Ler as mensagens  enviadas no grupo
-		else if(ui[0].equals("ler")) {
-			System.out.println(usuarios.get(ui[1]).getGrupos().get(ui[2]).mostrarmsg(usuarios.get(ui[1]).getIdUSer()));
+	
+		//olha usuarios pelo nome do grupo
+		else if(ui[0].equals("meususuarios")) {
+			System.out.println(grupos.get(ui[1]).MostrarUsuarios());
+			
 		}
-		
-		
-		//Mostrar a lista de notificações,
-		//usuário vê ao lado de cada grupo se ele possui mensagens não lidas
-		else if(ui[0].equals("notify")) {
-			String saida = "";
-			for(Chat c : usuarios.get(ui[1]).getGrupos().getAll()) {
-				saida += "Chat: " + c.getChat() + "(" +usuarios.get(ui[1]).contarMensagens(c)+") ";
+		//mostra grupos que tem
+		else if(ui[0].equals("mostrargrupos")){
+			String mostrar = " ";
+			for(Chat ch : grupos.getAll()) {
+				mostrar += ch.toString();
 			}
-			return saida;
+			return mostrar;
 		}
+		//mostra mensagem enviada atraves do nome do grupo
+		else if(ui[0].equals("mensagemdogrupo")) {
+			String mensa = " ";
+			for(Mensagem ch : grupos.get(ui[1]).getMensagens().getAll()) {
+				mensa += ch.toString() + " ";				
+			}
+			
+			return mensa;
+		}	
+		// mostra notificacao pelo nome do usuario
+		else if(ui[0].equals("mostrarnotificacao")) {
+			String mostrar = " ";
+			for(Chat ch : user.get(ui[1]).getGrupos().getAll()) {
+				mostrar += ch.getChat()+"[ " + user.get(ui[1]).contagem(ch)+" ]";
+			}
+			return mostrar;
+		}
+		
+		
+		
 		else
-			return " Comando invalido";
+			return "comando invalido";
 		return "done";
+		
 	}
 	
 	public void shell() {
-		while (true) {
-			String line = sca.nextLine();
+		while(true) {
+			String line = scan.nextLine();
 			try {
 				System.out.println(query(line));
-			} catch (RuntimeException re) {
+			}catch(RuntimeException re) {
 				System.out.println(re.getMessage());
 			}
 		}
+
 	}
 	
 	public static void main(String[] args) {
-		System.out.println("Digite um comando: ");
-        Controller c = new Controller();
-        c.shell();
+		System.out.println("Digite um dos comando: ");
+		Controller cont = new Controller();
+		cont.shell();
 	}
-	
+
 }
+
 /*
 adduser goku
 done
