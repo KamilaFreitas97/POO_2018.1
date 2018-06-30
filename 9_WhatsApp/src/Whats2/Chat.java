@@ -1,15 +1,18 @@
 package Whats2;
 
+
 public class Chat {
+	
 	private String chat;
-	public Repositorio<User> userchats;
-	public Repositorio<Mensagem> msg;
-	int qtdmsg = 0;
+	Repositorio<Usuario> users;
+	private Repositorio<Mensagem> mensagens;
+	
+	int qtdMensagens = 0;
 	
 	public Chat(String chat) {
 		this.chat = chat;
-		userchats = new Repositorio<User>("usuarios");
-		msg = new Repositorio<Mensagem>("mensagens");
+		users = new Repositorio<Usuario>("usuarios");
+		mensagens = new Repositorio<Mensagem>("mensagens");			
 	}
 
 	public String getChat() {
@@ -20,59 +23,57 @@ public class Chat {
 		this.chat = chat;
 	}
 
-	public Repositorio<User> getUserchats() {
-		return userchats;
+	public Repositorio<Mensagem> getMensagens() {
+		return mensagens;
 	}
 
-	public void setUserchats(Repositorio<User> userchats) {
-		this.userchats = userchats;
-	}
-
-	public Repositorio<Mensagem> getMsg() {
-		return msg;
-	}
-
-	public void setMsg(Repositorio<Mensagem> msg) {
-		this.msg = msg;
-	}
-	//ESCREVER MENSAGENS
-	public void escrever(Mensagem m) {
-		for(User u : userchats.getAll()) {
-			u.getGrupos().get(getChat()).getMsg().add(m.getIndice(), m);
-		}
-		msg.add(m.getIndice(),  m);
-	}
-	//MOSTRAR OS USUARIOS QUE ESTÃO NO GRUPO
-	public String mostrarusuarios() {
-		String saida = "[";
-		for(User u : userchats.getAll())
-			saida += u.toString() + " ";
-		return saida + "]";
+	public void setMensagens(Repositorio<Mensagem> mensagens) {
+		this.mensagens = mensagens;
 	}
 	
-	//ADICIONAR USUARIOS AO GRUPO
-	public void adicionarAOgrupo(User usuario) {
-		userchats.add(usuario.getIdUSer(), usuario);
-		usuario.getGrupos().add(getChat(), new Chat(getChat()));
-	} 
 	
-	//MOSTRAR MENSAGENS
-	public String mostrarmsg(String user) {
-		String saida = "";
-		for(Mensagem m : msg.getAll()) {
-			if(!user.equals(m.getUser())) {
-				saida += m +" ";
+	public Repositorio<Usuario> getUsers() {
+		return users;
+	}
+
+	public void setUsers(Repositorio<Usuario> users) {
+		this.users = users;
+	}
+
+	//metodo que vai mostrar os usuarios do grupo
+	public String MostrarUsuarios() {
+		String mostrar = " [";
+		for(Usuario usu : users.getAll())
+			mostrar += usu.toString() + "] \n"+ "\n";
+		return mostrar + " ";
+	}
+	//metodo de escrever mensagens
+	public void escreverMensagem(Mensagem men) {
+		//mensagens.add("",men);
+		for(Usuario us : this.users.getAll()) {
+			us.getMensagens().add(""+getMensagens(), men);
+			//return;
 			}
+			mensagens.add(men.getIndice(), men);
+	
 		}
-		return saida;
+	//metodo que mostra as mensagens no grupo
+	public String MostrarMensagem(String usu) {
+		String mostrar = " ";
+		for(Mensagem m : mensagens.getAll()) {
+			if(!usu.equals(m.getUser()))
+				mostrar += m + " ";
+			}
+		
+		return mostrar;
 	}
 	
-	
+	public void addusuarionogrupo(Usuario use) {
+		users.add(use.getIdUsuario(), use);
+	}
 	
 	
 	public String toString() {
-		return " "+chat;
+		return chat;
 	}
-	
-	
 }
