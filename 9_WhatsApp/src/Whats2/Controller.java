@@ -144,21 +144,25 @@ public class Controller {
 }
 
 /*
-adduser goku
-done
-adduser sara
-done
-adduser tina
-done
-allusers
-[ goku sara tina ]
-newchat goku guerreiros
-done
-new chat goku homens
- Comando invalido
-newchat goku homens
-done
-newchat sara familia
-done
+addusuario goku
+addusuario sara
+addusuario tina
+mostrar
+criargrupo goku guerreiros
+criargrupo goku homen
+criargrupo sara familia
+meusgrupos goku
+meusgrupos sara
+meusgrupos tina
+addnoGrupo goku guerreiros sara
+addnoGrupo sara guerreiros tina
+meusgrupos goku
+meusgrupos sara
+meusgrupos tina
+sairdogrupo sara guerreiros
+meusgrupos sara
+enviarmensagem guerreiros goku eu sou o goku
+enviarmensagem guerreiros tina oi goku
+mensagemdogrupo guerreiros
  * */
 
