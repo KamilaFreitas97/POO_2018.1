@@ -1,4 +1,4 @@
-package Whats2;
+package Whats;
 
 
 public class Chat {
