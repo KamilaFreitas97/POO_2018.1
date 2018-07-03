@@ -1,4 +1,4 @@
-package Whats2;
+package Whats;
 
 import java.util.Scanner;
 
